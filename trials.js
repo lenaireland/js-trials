@@ -47,19 +47,49 @@ function showPhoneNums(phNumbers) {
 // Transactions:
 
 // Create an empty map of transactions
-
+const accountTransactions = new Map();
 
 // Add function to add transactions
-
+function addTransaction(date, amount) {
+  accountTransactions.set(date, amount);
+}
 
 // Use the function to add transactions
-
+addTransaction('May-2', -500);
+addTransaction('May-13', 1200);
+addTransaction('May-15', -100);
+addTransaction('May-21', -359);
+addTransaction('May-29', 2200);
 
 // Add function to show balance status
-
+function showBalanceStatus(balance) {
+  if (balance < 0) {
+    console.log('YOU ARE OVERDRAWN');
+  } else if (balance >= 0 && balance < 20) {
+    console.log('Warning: You are close to zero balance');
+  } else {
+    console.log('Thank you for your business.');
+  }
+}
 
 // Add function to show transactions
+function showTransactions(transactions, balance) {
+  console.log(`Beginning Balance: ${balance}`);
 
+  let type;
+
+  for (let [date, value] of transactions) {
+    if (value >= 0) {
+      type = 'Deposit';
+    } else if (value < 0) {
+      type = 'Withdrawal';
+    }
+
+    balance += value;
+
+    console.log(`${date}: ${type} of ${value}.  Total balance: ${balance}`);
+  }
+}
 
 // ///////////////////////////////////////////////////////
 // All Customer Info:
