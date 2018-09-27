@@ -19,17 +19,17 @@ phoneNumbers.set('business', '415-123-4567');
 // Create User Info Display:
 
 // Add function to print account information 
-function accountInfo(acctHolder, acctNumber, busName) {
+function printAccount(acctHolder, acctNumber, busName) {
   console.log(`Account Holder Name: ${acctHolder}`);
   console.log(`Account Holder Number: ${acctNumber}`);
   console.log(`Business Name: ${busName}`);
 }
 
 // Add function to print all addresses, including a header
-function showAddresses(address_array) {
+function showAddresses(addressArray) {
   console.log('Addresses:');
 
-  for (let address of address_array) {
+  for (let address of addressArray) {
     console.log(address);
   }
 }
@@ -62,6 +62,8 @@ addTransaction('May-21', -359);
 addTransaction('May-29', 2200);
 
 // Add function to show balance status
+let startBalance = 1000;
+
 function showBalanceStatus(balance) {
   if (balance < 0) {
     console.log('YOU ARE OVERDRAWN');
@@ -88,6 +90,8 @@ function showTransactions(transactions, balance) {
     balance += value;
 
     console.log(`${date}: ${type} of ${value}.  Total balance: ${balance}`);
+
+    return balance;
   }
 }
 
@@ -96,19 +100,47 @@ function showTransactions(transactions, balance) {
 
 // Make an object with customer info
 
+const accountInfo = {
+  accountHolder: accountHolder,
+  accountNumber: accountNumber,
+  businessName: businessName,
+  addresses: addresses,
+  phoneNumbers: phoneNumbers,
+  accountTransactions: accountTransactions,
+  startBalance: startBalance
+};
 
 // Function to add customer attributes
-
+function addProperties(melon = 'Cantaloupe', numPets = 0) {
+  accountInfo.melon = melon;
+  accountInfo.numPets = numPets;
+}
 
 // Add attributes for this user
-
+addProperties('Casaba', 2);
 
 // ///////////////////////////////////////////////////////
 // Getting a Business Loan
 
-
 // Function to return loan rate
+function calcLoanRate(annualIncome) {
+  let preferred = false;
+  let rate = 0.04;
 
+  if (accountInfo.melon === 'Casaba' || accountInfo.numPets > 5) {
+    preferred = true;
+  }
+
+  if (annualIncome < 100000 && preferred === false) {
+    rate = 0.08;
+  } else if (annualIncome < 100000 && preferred === true) {
+    rate = 0.05;
+  } else if (annualIncome >= 100000 && annualIncome < 200000 && preferred === false) {
+    rate = 0.07;
+  }
+
+  return [preferred, rate];
+}
 
 // ///////////////////////////////////////////////////////
 // Account Report
