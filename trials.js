@@ -122,6 +122,8 @@ addProperties('Casaba', 2);
 // ///////////////////////////////////////////////////////
 // Getting a Business Loan
 
+let income = 100000;
+
 // Function to return loan rate
 function calcLoanRate(annualIncome) {
   let preferred = false;
@@ -147,7 +149,19 @@ function calcLoanRate(annualIncome) {
 
 
 // Add function to show bank customer report
+function printReport() {
+  let endbalance = showTransactions(accountTransactions, startBalance);
+  let [isPreferred, loanrate] = calcLoanRate(income);
 
+  console.log(`${accountInfo.accountHolder}`);
+  // this line isn't working because need to loop through map items
+  console.log(`${accountInfo.phoneNumbers}`);
+  console.log(`Starting balance: $${startBalance}, Ending balance: $${endbalance}`);
+
+  if (isPreferred === true) {
+    console.log(`Congratulations on being a premiere customer!`); 
+  }
+}
 
 
 // ///////////////////////////////////////////////////////
